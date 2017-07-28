@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Rely on the 'WorldPhones' dataset in the datasets\n# package (which generally comes preloaded).\nlibrary(datasets)\nsource(\"http://goo.gl/w64gfp\")\nlibrary(magrittr)\nlibrary(XML)\nlibrary(reshape)\n\n\nu <- \"https://drive.google.com/open?id=1VX3XeVXzDWWhcb36jik3k9Whq_gnELw_07L21L_QmnE\"\n\nacled <- readGoogleSheet(u) %>% cleanGoogleTable(table=1) %>% as.data.frame\n\nacled$Date <- as.Date(acled$Date, format=\"%m/%d/%Y\")\nacled$Day  <- acled$Date-min(acled$Date)\n\n# Force columns to be text\nacled[,2:ncol(acled)] <- sapply(acled[,2:ncol(acled)], as.numeric)\n\n# Create totals across countries\n# Total Suspected\nacled$totalIncidents <- with(acled, Awdal_incl+Bakool_incl+Banaadir_incl+Bari_incl+Bay_incl+Galguduug_incl)\n\n\nacled.long <- melt(acled, id.vars=c('Date','Day'))\n\n# Create a variable for country\nacled.long$Country <- ''\nacled.long$Country[grepl(\"Awdal_incl\",acled.long$variable)] <- \"Awdal\"\nacled.long$Country[grepl(\"Bakool_incl\",acled.long$variable)] <- \"Bakool\"\nacled.long$Country[grepl(\"Banaadir_incl\",acled.long$variable)] <- \"Banaadir\"\nacled.long$Country[grepl(\"Bari_incl\",acled.long$variable)] <- \"Bari\"\n# Define a server for the Shiny app\nfunction(input, output) {\n  \n  # Fill in the spot we created for a plot\n  output$IncidentPlot <- renderPlot({\n    \n    # Render a barplot\n    barplot(acled[,input$region], \n            main=input$region,\n            ylab=\"bla\",\n            xlab=\"ble\")\n  })\n} \n",
+    "created" : 1501244613886.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1270061817",
+    "id" : "73F118F5",
+    "lastKnownWriteTime" : 1501248141,
+    "last_content_update" : 1501248141592,
+    "path" : "~/UNHCR/App/ByRegion/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
