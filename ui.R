@@ -5,34 +5,9 @@ source("http://goo.gl/w64gfp")
 library(magrittr)
 library(XML)
 library(reshape)
+library(gsheet)
 
-
-# Use the google spreadsheet
-u <- "https://drive.google.com/open?id=1VX3XeVXzDWWhcb36jik3k9Whq_gnELw_07L21L_QmnE"
-
-acled <- readGoogleSheet(u) %>% cleanGoogleTable(table=1) %>% as.data.frame
-
-acled$Date <- as.Date(acled$Date, format="%m/%d/%Y")
-acled$Day  <- acled$Date-min(acled$Date)
-
-# Force columns to be text
-acled[,2:ncol(acled)] <- sapply(acled[,2:ncol(acled)], as.numeric)
-
-# Create totals across countries
-# Total Suspected
-acled$totalIncidents <- with(acled, Awdal_incl+Bakool_incl+Banaadir_incl+Bari_incl+Bay_incl+Galguduug_incl)
-
-
-acled.long <- melt(acled, id.vars=c('Date','Day'))
-
-# Create a variable for country
-acled.long$Country <- ''
-acled.long$Country[grepl("Awdal_incl",acled.long$variable)] <- "Awdal"
-acled.long$Country[grepl("Bakool_incl",acled.long$variable)] <- "Bakool"
-acled.long$Country[grepl("Banaadir_incl",acled.long$variable)] <- "Banaadir"
-acled.long$Country[grepl("Bari_incl",acled.long$variable)] <- "Bari"
-odd_indexes<-seq(4,40,2)
-
+odd_indexes<-seq(4,39,2)
 
 # Use a fluid Bootstrap layout
 fluidPage(    
@@ -45,14 +20,18 @@ fluidPage(
     # Define the sidebar with one input
     sidebarPanel(
       selectInput("region", "Region:", 
-                  choices=colnames(acled[odd_indexes])),
+                  choices=colnames(acled.long[odd_indexes])),
+      sliderInput("days", "Start-End", min = 1, max = nrow(acled.long),
+                  value = 30, step = 100, round = 0),
       hr(),
       helpText("Data from Innovation Jetson Google Sheet")
     ),
     
     # Create a spot for the barplot
     mainPanel(
-      plotOutput("IncidentPlot")  
+      plotOutput("IncidentPlot"),
+      plotOutput("ArrivalsPlot"),
+      plotOutput("DeparturesPlot")
     )
     
   )
