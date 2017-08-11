@@ -51,11 +51,19 @@ function(input, output) {
                       "Arrivals", 
                       "Departures"), 
                     each=input$days))
-    
-    list(long=long)
+    wide <- cbind(I, A, D)
+    list(long=long, wide=wide)
     
     
   })
+  #Create a datatable with all the values from the inputs
+  output$datatable <- renderTable({
+      Tdata <- mydata()[["wide"]]
+      Tdata <- cbind(day=1:nrow(Tdata), Tdata)
+      Tdata[seq(1, nrow(Tdata), length.out=30),]
+  })
+  
+  
   # Fill in the spot we created for a plot
   output$IncidentPlot <- renderPlot({
     

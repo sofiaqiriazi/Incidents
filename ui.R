@@ -30,7 +30,8 @@ fluidPage(
       sliderInput("departures", "Number of Departures", min = 1, max = 1000000,
                   value = 10, step = 100, round = 0),
       hr(),
-      helpText("Data from Innovation Jetson Google Sheet")
+      helpText("Data from Innovation Jetson Google Sheet"),
+      tableOutput("datatable")
     ),
     
     # Create a spot for the barplot
