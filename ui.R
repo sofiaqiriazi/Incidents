@@ -13,7 +13,7 @@ odd_indexes<-seq(5,39,2)
 fluidPage(    
   
   # Give the page a title
-  titlePanel("Incidents by Region"),
+  titlePanel("Data Generation"),
   
   # Generate a row with a sidebar
   sidebarLayout(      
