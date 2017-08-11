@@ -5,6 +5,10 @@ library(magrittr)
 library(XML)
 library(reshape)
 library(gsheet)
+library(ggplot2)
+library(scales)
+
+
 # Use the google spreadsheet
 incidents <- "https://drive.google.com/open?id=1VX3XeVXzDWWhcb36jik3k9Whq_gnELw_07L21L_QmnE"
 arrivals <- "https://drive.google.com/open?id=1HoMZooolfAAlEzyFhWhxxmzcpDqQu_WdBCT7v0o4X-Y"
@@ -32,6 +36,26 @@ deps.long[,2:ncol(deps.long)] <- sapply(deps.long[,2:ncol(deps.long)], as.numeri
 # Define a server for the Shiny app
 function(input, output) {
   
+  
+  mydata <- reactive({
+    # prepare columns for the merged graph
+    reg <- paste(strsplit(input$region, "_")[[1]][1],"Arrival",sep="_")
+    I <- acled.long[ 0:(input$days),input$region]
+    A <- arrs.long[ 0:input$days, reg ]
+    D <- deps.long[ 0:(input$days),strsplit(input$region, "_")[[1]][1]]
+    
+    long <- data.frame(
+      Period=rep((1:input$days),3), 
+      Population = c(I, A, D), 
+      Indicator=rep(c("Incidents", 
+                      "Arrivals", 
+                      "Departures"), 
+                    each=input$days))
+    
+    list(long=long)
+    
+    
+  })
   # Fill in the spot we created for a plot
   output$IncidentPlot <- renderPlot({
     
@@ -65,6 +89,19 @@ function(input, output) {
             ylab = "Date",
             xlab = "Departures")
     
+  })
+  
+  output$graph1 <- renderPlot({
+    
+    long <- mydata()[["long"]]
+    p <- ggplot(long[long$Indicator %in% input$Indicators,], 
+                aes(x=Period, y=Population, group=Indicator))    
+    p <- p + 
+      geom_line(aes(colour = Indicator), size=1, alpha=.75) + 
+      ggtitle("Total Data")+
+      scale_x_continuous(name="Days")+ 
+      scale_y_continuous(labels = comma, name="")
+    print(p)
   })
 } 
 
