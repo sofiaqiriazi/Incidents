@@ -1,16 +1,20 @@
 # Rely on the 'WorldPhones' dataset in the datasets
 # package (which generally comes preloaded).
+library(shiny)
 library(datasets)
-source("http://goo.gl/w64gfp")
 library(magrittr)
 library(XML)
 library(reshape)
 library(gsheet)
 
-odd_indexes<-seq(5,39,2)
+incidents <- "https://drive.google.com/open?id=1VX3XeVXzDWWhcb36jik3k9Whq_gnELw_07L21L_QmnE"
+acled <- gsheet2text(incidents)
+acled.long <- read.csv(text=acled)
 
+odd_indexes<-seq(5,39,2)
+shinyUI(
 # Use a fluid Bootstrap layout
-fluidPage(    
+  fluidPage(    
   
   # Give the page a title
   titlePanel("Data Generation"),
@@ -19,6 +23,7 @@ fluidPage(
   sidebarLayout(      
     # Define the sidebar with one input
     sidebarPanel(
+      
       selectInput("region", "Region:", 
                   choices=colnames(acled.long[odd_indexes])),
       sliderInput("days", "Number of Days", min = 1, max = nrow(acled.long),
@@ -52,4 +57,5 @@ fluidPage(
     )
     
   )
+)
 )
