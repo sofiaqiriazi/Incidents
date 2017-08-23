@@ -11,10 +11,17 @@ incidents <- "https://drive.google.com/open?id=1VX3XeVXzDWWhcb36jik3k9Whq_gnELw_
 acled <- gsheet2text(incidents)
 acled.long <- read.csv(text=acled)
 
+
+
 odd_indexes<-seq(5,39,2)
 shinyUI(
 # Use a fluid Bootstrap layout
-  fluidPage(    
+  fluidPage(  
+  
+  tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+      tags$script(src="main.js")
+  ),
   
   # Give the page a title
   titlePanel("Data Generation"),
@@ -34,6 +41,10 @@ shinyUI(
                   value = 10, step = 100, round = 0),
       sliderInput("departures", "Number of Departures", min = 1, max = 1000000,
                   value = 10, step = 100, round = 0),
+      sliderInput("futuredays", "Days to Predict", min = 1, max = 30,
+                  value = 5, step = 1, round = 0),
+      sliderInput("futureconflct", "Average number of Conflicts", min = 1, max = 1000000,
+                  value = 10, step = 100, round = 0),
       hr(),
       helpText("Data from Innovation Jetson Google Sheet"),
       tableOutput("datatable")
@@ -51,6 +62,7 @@ shinyUI(
                            "Departures"),
                          inline=TRUE),
       plotOutput("graph1"),
+      plotOutput("graph2"),
       plotOutput("IncidentPlot"),
       plotOutput("ArrivalsPlot"),
       plotOutput("DeparturesPlot")
