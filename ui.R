@@ -24,7 +24,7 @@ shinyUI(
   ),
   
   # Give the page a title
-  titlePanel("Data Generation"),
+  titlePanel("Predictive Engine"),
   
   # Generate a row with a sidebar
   sidebarLayout(      
