@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "body{\n  font-family: 'Lato', sans-serif;\n\n}\n\n.container-fluid{\n  background-color:#3f464b;  \n}\n\nlabel{\n  font-family: 'Oswald', sans-serif;\n\n}\n\n#arrivals_number{\n    margin-top: 20px;\n    margin-bottom: 10px;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    letter-spacing: 4px;\n    color:white;\n}\n\n#graph1{\n  background-color:#3f464b;\n}\n\n.h1, .h2, .h3, h1, h2, h3 {\n    margin-top: 20px;\n    margin-bottom: 10px;\n    font-family: 'Oswald', sans-serif;\n    text-transform: uppercase;\n    letter-spacing: 4px;\n    color:white;\n}\n\n.shiny-server-account {\n    visibility: hidden\n}\n\n.well {\n    background: #3f464b;\n    color: #fff;\n    border: none\n}\n\n.irs-line {\n    height: 5px;\n    top: 26px;\n    background: rgba(0, 0, 0, 0.15);\n    border: 0px solid #CCC;\n    border-radius: 16px;\n    -moz-border-radius: 16px;\n}\n\n.irs-line-left {\n    height: 8px;\n}\n\n.irs-line-mid {\n    height: 8px;\n}\n\n.irs-line-right {\n    height: 8px;\n}\n\n.irs-bar {\n    height: 5px;\n    top: 26px;\n    border-top: 1px solid #428bca;\n    border-bottom: 1px solid #428bca;\n    background: #428bca;\n}\n\n.irs-bar-edge {\n    height: 5px;\n    top: 26px;\n    width: 14px;\n    border: 1px solid #428bca;\n    border-right: 0;\n    background: #428bca;\n    border-radius: 16px 0 0 16px;\n    -moz-border-radius: 16px 0 0 16px;\n}\n\n.irs-shadow {\n    height: 2px;\n    top: 38px;\n    background: #000;\n    opacity: 0.3;\n    border-radius: 5px;\n    -moz-border-radius: 5px;\n}\n\n.lt-ie9 .irs-shadow {\n    filter: alpha(opacity=30);\n}\n\n.irs-slider {\n    top: 17px;\n    width: 22px;\n    height: 22px;\n    border: 0px solid #AAA;\n    background: #fff;\n    border-radius: 27px;\n    -moz-border-radius: 27px;\n    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);\n    cursor: pointer;\n}\n\n#irs-active-slider,\n.irs-slider:hover {\n    background: #FFF;\n}\n\n.irs-min,\n.irs-max {\n    color: #fff;\n    font-size: 10px;\n    line-height: 1.333;\n    text-shadow: none;\n    top: 0;\n    padding: 1px 3px;\n    background: rgba(0, 0, 0, 0.1);\n    border-radius: 3px;\n    -moz-border-radius: 3px;\n}\n\n.lt-ie9 .irs-min,\n.lt-ie9 .irs-max {\n    background: #ccc;\n}\n\n.irs-from,\n.irs-to,\n.irs-single {\n    color: #fff;\n    font-size: 11px;\n    line-height: 1.333;\n    text-shadow: none;\n    padding: 1px 3px;\n    background: #428bca;\n    border-radius: 3px;\n    -moz-border-radius: 3px;\n}\n\n.help-block {\n    color: #fff\n}\n\n.selectize-input {\n    border: none;\n    box-shadow: 0 5px 5px rgba(0, 0, 0, .1);\n    border-radius: 2px;\n}",
+    "created" : 1506790846836.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "579061830",
+    "id" : "E585B870",
+    "lastKnownWriteTime" : 1506845915,
+    "last_content_update" : 1506845915482,
+    "path" : "~/UNHCR/App/FinalEngine/www/style.css",
+    "project_path" : "www/style.css",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "css"
+}
